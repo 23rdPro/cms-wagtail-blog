@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% load static wagtailimages_tags wagtailcore_tags wagtailmarkdown wagtailroutablepage_tags %}
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  {% include "wagtailseo/meta.html" %}
+</head>
+
+<body>
+<div id="colorlib-page">
+  <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+
+  <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+    <nav id="colorlib-main-menu" role="navigation">
+      {% include 'nav.html' %}
+    </nav>
+    <div class="colorlib-footer">
+      <h1 id="colorlib-logo" class="mb-4"><a href="" style="background-image: url('/static/images/bg_1.jpg');">
+        Explicit &gt; <span>Implicit</span></a></h1>
+      <div class="mb-4">
+        <h3>Subscribe for newsletter</h3>
+        {% include 'form.html' %}
+
+      </div>
+      <p class="pfooter">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="icon-heart" aria-hidden="true"></i> <a href="mailto:mailolumide@gmail.com" target="_blank">Olumide Bakare</a>
+      </p>
+    </div>
+  </aside>
+
+  <div id="colorlib-main">
+    <section class="ftco-section ftco-no-pt ftco-no-pb">
+      <div class="container">
+        <div class="row d-flex">
+          <div class="col-xl-8 py-5 px-md-5">
+            {% block content %}
+            {% endblock %}
+            <div class="row pt-md-4">
+              {% if email %}
+                {% block email %}{% endblock %}
+              {% endif %}
+
+              {% block search_result %}
+              {% endblock %}
+
+              {% block post_list %}
+              {% endblock %}
+            </div>
+            {% block pagination %}
+            {% endblock %}
+          </div>
+          <div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+            <div class="sidebar-box pt-md-4">
+              <form action="{% url 'search' %}" method="get" class="search-form">
+                <div class="form-group">
+                  <span class="icon icon-search"></span>
+                  <input type="text" class="form-control"
+                         name="query"{% if search_query %} value="{{ search_query }}"{% endif %}
+                         placeholder="Type a keyword and hit enter">
+                </div>
+              </form>
+            </div>
+            {% if page.title == 'Home' %}
+            {% if tags %}
+            <div class="sidebar-box ftco-animate">
+              <h3 class="sidebar-heading">Tags</h3>
+              <ul class="tagcloud">
+                {% for tag in tags %}
+                <a href="" class="tag-cloud-link">{{tag}}</a>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            {% if page.tags.all.count %}
+            <div class="sidebar-box ftco-animate">
+              <h3 class="sidebar-heading">Tags</h3>
+              <ul class="tagcloud">
+                {% for tag in page.tags.all %}
+                <a href="{% routablepageurl blog_page 'post_by_tag' tag.slug %}" class="tag-cloud-link">{{tag}}</a>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+
+
+            {% for block in page.body %}
+            {% if block.block_type == 'toc' %}
+            <div class="sidebar-box ftco-animate">
+              <h3 class="sidebar-heading">Table of contents</h3>
+              {{ block }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% if page %}
+            <div class="sidebar-box ftco-animate">
+              <h3 class="sidebar-heading">Latest Article</h3>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url('/static/images/image_1.jpg');"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="{{ blog_page.get_latest.url }}">{{ blog_page.get_latest.title }}</a></h3>
+                  <div class="meta">
+                    <div><a href="{{ blog_page.get_latest.url }}"><span class="icon-calendar"></span> {{ post.date|date:"M, Y" }}</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if posts %}
+            <div class="sidebar-box ftco-animate">
+              <h3 class="sidebar-heading">Archive</h3>
+              {% for post in posts %}
+              <div class="block-21 mb-4 d-flex">
+                <a href="{% pageurl post %}" class="blog-img mr-4" >
+                  {% image post.main_image fill-100x80 %}
+                </a>
+                <div class="text">
+                  <h3 class="heading"><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+                  <div class="meta">
+                    <div><a href="{% pageurl post %}"><span class="icon-calendar"></span> {{ post.date|date:"M, Y" }}</a></div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if categories %}
+            <div class="sidebar-box ftco-animate">
+              <h3 class="sidebar-heading">Categories</h3>
+              {% for category in categories %}
+              <ul class="categories">
+                <li><a >{{ category }} <span>({{category.blogs}})</span></a></li>
+              </ul>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+{% include 'script.html' %}
+{% if page %}
+<script>
+    var h = document.getElementsByTagName("h3");
+    var text = "Table of contents";
+    var found;
+
+    for (var i=0; i<h.length; i++){
+        if (h[i].textContent == text){
+            found = h[i];
+            break;
+        }
+    }
+
+    var parent = found.parentElement;
+    var children = parent.children;
+    for (var i=2; i<children.length; i++){
+        var child = children[i];
+        child.style.display = 'none'
+    }
+</script>
+{% endif %}
+{% include "wagtailseo/struct_data.html" %}
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static wagtailcore_tags wagtailmarkdown wagtailroutablepage_tags blog_tags %}
+<html lang="en">
+
+<head>
+   {% include 'head.html' %}
+</head>
+<body>
+<div id="colorlib-page">
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+        <nav id="colorlib-main-menu" role="navigation">
+            {% include 'nav.html' %}
+        </nav>
+        <div class="colorlib-footer">
+            <h1 id="colorlib-logo" class="mb-4"><a href="" style="background-image: url('/static/images/bg_1.jpg');">
+                Explicit &gt; <span>Implicit</span></a></h1>
+            <div class="mb-4">
+                <h3>Subscribe for newsletter</h3>
+                {% include 'form.html' %}
+            </div>
+            <p class="pfooter">
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="icon-heart" aria-hidden="true"></i> <a href="mailto:mailolumide@gmail.com" target="_blank">Olumide Bakare</a>
+            </p>
+        </div>
+    </aside>
+    <div id="colorlib-main">
+        <section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+            <div class="container-fluid px-0">
+                <div class="row d-flex">
+                    <div class="col-md-6 d-flex">
+                        <img  class="img d-flex align-self-stretch align-items-center js-fullheight"
+                              src="{{ page.image.url }}">
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="text px-4 pt-5 pt-md-0 px-md-4 pr-md-5 ftco-animate">
+                            <h2 class="mb-4">I'm <span>Olumide Bakare</span> a Nigerian Blogger &amp; Explorer</h2>
+                            <p>A small river named Duden flows by their place and supplies it with
+                                the necessary regelialia. It is a paradisematic country, in which
+                                roasted parts of sentences fly into your mouth. It is a paradisematic
+                                country, in which roasted parts of sentences fly into your mouth.</p>
+                            <div class="tag-widget post-tag-container mb-5 mt-5">
+                                <div class="tagcloud">
+                                    <a href="#" class="tag-cloud-link">Resumé</a>
+                                    <a href="#" class="tag-cloud-link">twiiter</a>
+                                    <a href="#" class="tag-cloud-link">linkedin</a>
+                                    <a href="#" class="tag-cloud-link">github</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% include 'script.html' %}
+
+</body>
+</html>

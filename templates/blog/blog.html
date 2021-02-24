@@ -1,0 +1,43 @@
+{% extends 'home/base.html' %}
+{% load static wagtailimages_tags menu_tags wagtailcore_tags wagtailmarkdown wagtailroutablepage_tags blog_tags %}
+
+{% block content %}
+
+<h1> <u>{{ page.title }}</u></h1>
+<div class="row pt-md-4">
+    {% for block in page.body %}
+    {% if block.block_type == 'body' %}
+    {{ block.value|markdown }}<br>
+
+    {% elif block.block_type == 'code' %}
+    <pre>
+        <font size="" class="highlight">{{ block.value|markdown }}<br></font>
+    </pre>
+
+    {% elif block.block_type == 'image' %}
+    <p class="vcard bio img-fluid">
+        {{ block.value|markdown }}
+    </p>
+    {% endif %}
+    {% endfor %}
+    <div class="tag-widget post-tag-container mb-5 mt-5">
+        <div class="tagcloud">
+            {% if page.tags.all.count %}
+            {% for tag in page.tags.all %}
+            <a href='{% routablepageurl blog_page "post_by_tag" tag.slug %}'
+               class="tag-cloud-link">{{ tag }}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+<div class="pt-5 mt-5">
+    <ul class="comment-list">
+        <li class="comment">
+            {% show_comments %}
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

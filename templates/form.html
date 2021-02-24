@@ -1,0 +1,9 @@
+<form action="{% url 'subscribe' %}" class="colorlib-subscribe-form"
+      method="post" novalidate>{% csrf_token %}
+    <div class="form-group d-flex">
+        <div class="icon"><span class="icon-paper-plane"></span></div>
+        <!--            <input type="text" class="form-control" placeholder="Enter Email Address">-->
+        <input type="email" name="email" class="form-control"
+               placeholder="Enter Email Address" maxlength="199" required id="id_email">
+    </div>
+</form>
