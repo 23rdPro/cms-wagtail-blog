@@ -54,5 +54,4 @@ wheels/
 !**/migrations/__init__.py
 
 project/static
-project/settings
 home/static

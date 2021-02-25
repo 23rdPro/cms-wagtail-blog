@@ -93,20 +93,20 @@
             </div>
             {% endif %}
             {% endfor %}
-            {% if page %}
-            <div class="sidebar-box ftco-animate">
-              <h3 class="sidebar-heading">Latest Article</h3>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url('/static/images/image_1.jpg');"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="{{ blog_page.get_latest.url }}">{{ blog_page.get_latest.title }}</a></h3>
-                  <div class="meta">
-                    <div><a href="{{ blog_page.get_latest.url }}"><span class="icon-calendar"></span> {{ post.date|date:"M, Y" }}</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
+<!--            {% if page %}-->
+<!--            <div class="sidebar-box ftco-animate">-->
+<!--              <h3 class="sidebar-heading">Latest Article</h3>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url('/static/images/image_1.jpg');"></a>-->
+<!--                <div class="text">-->
+<!--                  <h3 class="heading"><a href="{{ blog_page.get_latest.url }}">{{ blog_page.get_latest.title }}</a></h3>-->
+<!--                  <div class="meta">-->
+<!--                    <div><a href="{{ blog_page.get_latest.url }}"><span class="icon-calendar"></span> {{ post.date|date:"M, Y" }}</a></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            {% endif %}-->
 
             {% if posts %}
             <div class="sidebar-box ftco-animate">

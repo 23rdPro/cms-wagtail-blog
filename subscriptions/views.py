@@ -39,7 +39,7 @@ def subscribe(request):
         return render(request, 'blog/subscribe.html',
                       {
                           'email': sub.email,
-                          'action': 'added, we sent you a message already,<br> please confirm your email.',
+                          'action': 'added, we sent you a message already, please confirm your email.',
                           'conf_num': sub.conf_num,
                           'form': SubscriberForm()
                       },)
